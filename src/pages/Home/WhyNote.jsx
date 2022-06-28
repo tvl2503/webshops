@@ -1,6 +1,6 @@
 import React from 'react'
 import Grid from '../../components/Grid'
-const img = "http://t0320.store.nhanh.vn/tp/T0320/img/img-shop.png"
+const img = "https://res.cloudinary.com/fef/image/upload/v1656410546/img-shop_ejyb0m.png"
 
 const WhyNote = ({data}) => {
   return (

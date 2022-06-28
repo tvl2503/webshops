@@ -1,6 +1,6 @@
 import React,{ useRef } from 'react'
 import { Link } from 'react-router-dom';
-const logo  = "http://t0320.store.nhanh.vn/img/nhanh.png";
+const logo  = "https://res.cloudinary.com/fef/image/upload/v1656410485/nhanh_fycbje.png";
 const mainNav = [
     {
         name: "Giày Nike",
