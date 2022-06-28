@@ -7,13 +7,22 @@ import Login from '../../pages/User/Login'
 import Register from '../../pages/User/Register'
 import Footer from './Footer'
 import Header from './Header'
+import { listProduct } from '../../assets/data/product'
+import Contact from '../../pages/Contact'
+import ProductViewModal from '../ProductViewModal'
 const Layout = () => {
   return (
     <BrowserRouter>
         <Header />
         <Routes>
             <Route path = "/" element={<Home />} />
-            <Route path = "/nike" element={<Nike />} />
+            {listProduct.map((item, index) => (
+              <Route 
+                key = {index} 
+                path = {item.path} 
+                element={<Nike  path = {item.path} listProduct = {item.products} brumb = {item.title} index = {index} />} />
+            ))}
+            <Route path = "contact" element ={<Contact />} />
             <Route path = "user">
               <Route index = {true} element = {<NotFound/>} />
               <Route path = "login" element = {<Login />} />
@@ -22,6 +31,7 @@ const Layout = () => {
             <Route path = "*" element = {<NotFound/>} />
         </Routes>
         <Footer />
+        <ProductViewModal />
     </BrowserRouter>
   )
 }

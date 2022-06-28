@@ -5,7 +5,7 @@ import "./ProductCategory.scss"
 import Grid from '../Grid'
 import ProductCard from '../ProductCard'
 const img =  "http://t0320.store.nhanh.vn/tp/T0320/img/banner-mid.png"
-const ProductCategory = ({products, title}) => {
+const ProductCategory = ({products, title, path}) => {
   return (
     <div className='product--category'>
         <div className="product--category__banner">
@@ -25,7 +25,8 @@ const ProductCategory = ({products, title}) => {
           </Grid>
         </div>
         <div className="feature--product__other">
-            <button>Xem thêm các sản phẩm khác</button>
+          <Link to = {path}> <button>Xem thêm các sản phẩm khác</button></Link>
+           
         </div>
     </div>
   )

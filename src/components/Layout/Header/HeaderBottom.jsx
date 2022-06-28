@@ -12,19 +12,19 @@ const mainNav = [
     },
     {
         name: "Giày mlb",
-        path: "adidas", 
+        path: "mlb", 
     },
     {
         name: "Phụ kiện",
-        path: "adidas", 
+        path: "phu-kien", 
     },
     {
         name: "Tin tức chung",
-        path: "adidas", 
+        path: "tin-tuc-chung", 
     },
     {
         name: "Liên hệ",
-        path: "adidas", 
+        path: "contact", 
     },
 ]
 const HeaderBottom = () => {

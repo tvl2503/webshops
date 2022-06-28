@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 const HeaderTop = () => {
   return (
     
@@ -21,12 +21,18 @@ const HeaderTop = () => {
                     <input type="text" placeholder='Tìm kiếm sản phẩm' />
             </div>
             <div className="header__top__user">
-                    <div className="header__top__user__item">
-                        Đăng nhập
-                    </div>
-                    <div className="header__top__user__item">
-                        Đăng ký
-                    </div>
+                    <Link to = "/user/login">
+                        <div className="header__top__user__item">
+                            Đăng nhập
+                         </div>
+                    </Link>
+                    
+                    <Link to = "/user/register">
+                        <div className="header__top__user__item">
+                             Đăng ký
+                        </div>
+                    </Link>
+                    
             </div>
         </div>
   )

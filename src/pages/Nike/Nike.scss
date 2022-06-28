@@ -1,0 +1,10 @@
+@import "../../components/GlobalStyles/mixin";
+.content{
+    display: flex;
+    &--list--product{
+        text-align: center;
+    }
+    @include mobile{
+        display: block;
+    }
+}

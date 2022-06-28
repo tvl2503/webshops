@@ -7,6 +7,7 @@ import policy from '../../assets/data/policy'
 import "./Home.scss"
 import WhyNote from './WhyNote'
 import ProductCategory from '../../components/ProductCategory'
+import { getListProduct } from '../../assets/data/product'
 const Home = () => {
   return (
     <div className='home'>
@@ -15,8 +16,8 @@ const Home = () => {
       <FeatureProduct products = {products}  />
       <WhyNote data = {policy} />
       {
-        products.map((item, index) => (
-          <ProductCategory key = {index} products = {item.product} title = {item.name} />
+        getListProduct(8).map((item, index) => (
+          <ProductCategory key = {index} products = {item.products} path = {item.path} title = {item.title} />
         ))
       }
     </div>

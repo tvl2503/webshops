@@ -3,14 +3,26 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import "./ProductCard.scss"
 import numberWithVND from '../../utils/numberwithvnd'
+import { addProductModal } from '../../redux/action'
+
+
+import { useDispatch } from 'react-redux';
 const ProductCard = ({product}) => {
+
+  const dispatch = useDispatch();
+  const handleAddProduct = () => {
+ 
+    dispatch(addProductModal(product))
+
+
+  }
   return (
     <div className='product--card'>
         <div className="product--card__img">
          <Link to = "/">
             <img src={product.src} alt="" />
          </Link>
-        <div className="product--card__img__quickview">
+        <div className="product--card__img__quickview" onClick={handleAddProduct} >
           <i class="fal fa-eye"></i>
           <span>Xem nhanh</span>
         </div>

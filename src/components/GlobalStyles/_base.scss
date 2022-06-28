@@ -58,6 +58,7 @@ img {
     max-width: 1100px;
     @include tablet{
         max-width: 992px;
+        padding: 0 20px;
     }
     @include mobile{
         max-width: 600px;
