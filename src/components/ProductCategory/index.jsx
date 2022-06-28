@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import "./ProductCategory.scss"
 import Grid from '../Grid'
 import ProductCard from '../ProductCard'
-const img =  "http://t0320.store.nhanh.vn/tp/T0320/img/banner-mid.png"
+const img =  "https://res.cloudinary.com/fef/image/upload/v1656410809/banner-mid_viarpe.png"
 const ProductCategory = ({products, title, path}) => {
   return (
     <div className='product--category'>
