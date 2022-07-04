@@ -8,7 +8,7 @@ const Header = () => {
   const headerRef = useRef(null)
   useEffect(() => {
     window.addEventListener("scroll", ()=> {
-      if(document.body.scrollTop > 30 || document.documentElement.scrollTop > 30){
+      if(document.body.scrollTop > 10 || document.documentElement.scrollTop > 10){
         headerRef.current.classList.add("shrink")
       }
       else {

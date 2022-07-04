@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Button from '../../components/Button'
 import Grid from '../../components/Grid'
+import Helmet from '../../components/Helmet'
 import { isValidEmail, isValidPassword } from '../../utils/validate'
 
 import "./User.scss"
@@ -51,6 +52,8 @@ const Register = () => {
         return errors
     }
   return (
+    <Helmet title = "Đăng ký" >
+
     <div className='login'>
                <div className="login__title">
                    <h1>Đăng Ký</h1>
@@ -86,6 +89,7 @@ const Register = () => {
                    </div>
             </div>
     </div>
+    </Helmet>
   )
 }
 

@@ -7,6 +7,9 @@ import { filterProduct } from '../../Context/Context';
 import ProductCard from '../../components/ProductCard';
 import "./Nike.scss"
 import { useEffect } from 'react';
+import Helmet from '../../components/Helmet';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 const banner = "https://mcdn.nhanh.vn/store3/97757/bn/Banner_Mule_1400x600.jpg"
 
 
@@ -18,6 +21,12 @@ const Nike = ({path, listProduct, brumb, index}) => {
     }
   ]
   const [products, setProducts] = useState(listProduct);
+  const [page, setPage] = useState(1);
+  const handleChangePage = (page) => {
+    setPage(page)
+
+  }
+  console.log(page);
   const handleFilterProduct = (filter) => {
     setProducts(filter)
   }
@@ -25,6 +34,7 @@ const Nike = ({path, listProduct, brumb, index}) => {
     setProducts(listProduct)
   }, [listProduct])
   return (
+    <Helmet title = {brumb}>
     <filterProduct.Provider value = {{ handleFilterProduct}}>
         <Banner src = {banner}  />
         <Breadcrumb crumbs = {crumbs} />
@@ -38,9 +48,15 @@ const Nike = ({path, listProduct, brumb, index}) => {
               ))
             }
           </Grid>
+          {/* <div className="pagination">
+            <Stack spacing={2}>
+              <Pagination count={Math.floor(products.length / 10) + 1} color="secondary" onChange={(e) => handleChangePage(e.target.textContent)} />
+            </Stack>
+          </div> */}
           </div>
         </div>
     </filterProduct.Provider>
+    </Helmet>
   )
 }
 

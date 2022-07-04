@@ -10,6 +10,8 @@ import Header from './Header'
 import { listProduct } from '../../assets/data/product'
 import Contact from '../../pages/Contact'
 import ProductViewModal from '../ProductViewModal'
+import Cart from '../../pages/Cart'
+import Product from '../../pages/Product'
 const Layout = () => {
   return (
     <BrowserRouter>
@@ -23,6 +25,8 @@ const Layout = () => {
                 element={<Nike  path = {item.path} listProduct = {item.products} brumb = {item.title} index = {index} />} />
             ))}
             <Route path = "contact" element ={<Contact />} />
+            <Route path = "cart" element ={<Cart />} />
+            <Route path='product' element = {<Product />} />
             <Route path = "user">
               <Route index = {true} element = {<NotFound/>} />
               <Route path = "login" element = {<Login />} />

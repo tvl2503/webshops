@@ -1,6 +1,7 @@
 import React from 'react'
 import Breadcrumb from '../../components/Breadcrumb'
 import Grid from '../../components/Grid'
+import Helmet from '../../components/Helmet'
 import "./Contact.scss"
 const crumbs = [
     {
@@ -27,6 +28,7 @@ const info = [
 ]
 const Contact = () => {
   return (
+    <Helmet title = "Liên hệ">
     <div className="contact">
         <div className='container'>
             <Breadcrumb crumbs = {crumbs} />
@@ -69,6 +71,7 @@ const Contact = () => {
             </div>
         </div>
     </div>
+    </Helmet>
   )
 }
 

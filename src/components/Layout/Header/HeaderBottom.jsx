@@ -52,8 +52,8 @@ const HeaderBottom = () => {
                     </button>
                 </div>
                 {mainNav.map((item, index) => (
-                    <div key = {index} className="header__bottom__menu__item">
-                        <Link to = {item.path}>
+                    <div key = {index} className="header__bottom__menu__item" onClick={menuToggle}>
+                        <Link to = {item.path} >
                             {item.name}
                         </Link>
                     </div>
@@ -68,7 +68,9 @@ const HeaderBottom = () => {
                 </div>
             </div>
             <div className="header__bottom__cart">
-                <i className="fal fa-shopping-cart"></i>
+                <Link to = "cart">
+                    <i className="fal fa-shopping-cart"></i>
+                </Link>
             </div>
         </div>
   )

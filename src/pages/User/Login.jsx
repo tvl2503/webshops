@@ -5,6 +5,7 @@ import Grid from '../../components/Grid'
 import "./User.scss"
 import { isValidEmail, isValidPassword } from '../../utils/validate'
 import { useState } from 'react'
+import Helmet from '../../components/Helmet'
 const Login = () => {
     const initialValues = { email: "", password: ""}
     const [formValues, setFormValues] = useState(initialValues)
@@ -42,6 +43,8 @@ const Login = () => {
         return errors
     }
   return (
+    <Helmet title = "Đăng nhập">
+
     <div className='login'>
                <div className="login__title">
                    <h1>Đăng nhập</h1>
@@ -84,6 +87,7 @@ const Login = () => {
                    </div>
             </div>
     </div>
+    </Helmet>
   )
 }
 

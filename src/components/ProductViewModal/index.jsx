@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeProductModal } from '../../redux/action'
 import numberWithVND from '../../utils/numberwithvnd'
@@ -6,6 +7,7 @@ import "./ProductViewModal.scss"
 const ProductViewModal = () => {
     const dispatch = useDispatch()
     const product = useSelector(state => state.productModal.product)
+    const [size, setSize] = useState(null);
     const [quantity, setQuantity] = useState(1);
     const removeModal = () => {
         dispatch(removeProductModal())
@@ -16,6 +18,10 @@ const ProductViewModal = () => {
     const handleDecrement = () => {
         setQuantity(state => state  > 1 ? state - 1 : state)
     }
+    useEffect(() => {
+        setSize(null);
+        setQuantity(1);
+    }, [product])
   return (
     <>
         {
@@ -45,9 +51,9 @@ const ProductViewModal = () => {
                         <div className="size">
                             <div className="size__header">SIZE</div>
                             <div className="size__list">
-                                <div className="size__list__item active">40</div>
-                                <div className="size__list__item">41</div>
-                                <div className="size__list__item">42</div>
+                                {product.size.map((item, index) => (
+                                    <div key = {index} className={`size__list__item ${item === size ? 'active': ''}`} onClick = {() => setSize(item)}>{item}</div>
+                                ))}
                             </div>
                         </div>
                         <div className="input--quantity">

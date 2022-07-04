@@ -1,7 +1,10 @@
 import React from 'react'
+import Helmet from '../../components/Helmet'
 import "./NotFound.scss"
 const NotFound = () => {
   return (
+    <Helmet title ="Lỗi 404">
+
     <div className='container'>
     <div className="error">
                 <div className="container-floud">
@@ -21,6 +24,7 @@ const NotFound = () => {
                 </div>
             </div>
     </div>
+    </Helmet>
   )
 }
 

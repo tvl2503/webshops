@@ -57,10 +57,10 @@ const SideBar = props => {
         <div className="category__list">
           {
             !hideCate && category.map((item, index) => (
-              <div className="category__list__item">
-                <Link to = {item.path} className = {`${index === props.index ? 'active': ''}`}>
+              <div key = {index} className="category__list__item">
+                <Link to = {item.path} className = {`${index === props.index ? 'active': ''} ${props.index === -1 ? 'active' : ''}`}>
                 {item.title}
-                <input type="checkbox"  checked={index === props.index} />
+                <input type="checkbox"  checked={index === props.index}  />
                   <span className='checkmark'></span>
                 </Link>
               </div>
