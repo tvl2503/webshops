@@ -92,7 +92,7 @@ const SideBar = props => {
           </div>
           }
       </div>
-      <div className="price--range size--checkbox">
+      {/* <div className="price--range size--checkbox">
           <div className={`price--range__title ${hideSize? 'active' : ''}`}>
             <span>Kích thước</span>
             <span className='icon--control' onClick={() => setHideSize(!hideSize)} >
@@ -115,7 +115,7 @@ const SideBar = props => {
            </FormGroup>
           </div>
         }
-      </div>
+      </div> */}
     </div>
   )
 }
