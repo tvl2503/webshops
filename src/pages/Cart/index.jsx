@@ -13,39 +13,40 @@ const Cart = () => {
   return (
     <div className='cart container'>
         <Breadcrumb crumbs = {crumbs} />
-        <div className="cart__main">
-            <div className="cart__main__thead">
+        {/* <table className="cart__main">
+            <tr className="cart__main__thead">
                 {
                     thead.map((item, index) => (
-                    <div key = {index} className="cart__main__thead__item">
+                    <th key = {index} className="cart__main__thead__item">
                         {item}
-                    </div>
+                    </th>
                     ))
                 }
-            </div>
-            <div className="cart__main__tbody">
-            <div className="cart__main__tbody__item">
-                <img src="https://traffic-edge37.cdn.vncdn.io/nvn/ncdn/store3/97757/ps/20220316/16032022040342_49_1.jpeg" alt="" />
-            </div>
-            <div className="cart__main__tbody__item">
-                <Link to = "">
-                    Giày Nike Air Force 1 Low Shadow Sunset Pulse (W)
-                </Link>
-            </div>
-            <div className="cart__main__tbody__item">
-                <span>2999000</span>
-            </div>
-            <div className="cart__main__tbody__item">
-                <input type="text" value={1} />
-            </div>
-            <div className="cart__main__tbody__item">
-                <span>2999000</span>
+            </tr>
+            <tr className="cart__main__tbody">
+                <td className="cart__main__tbody__item">
+                    <img src="https://traffic-edge37.cdn.vncdn.io/nvn/ncdn/store3/97757/ps/20220316/16032022040342_49_1.jpeg" alt="" />
+                </td>
+                <td className="cart__main__tbody__item">
+                    <Link to = "">
+                        Giày Nike Air Force 1 Low Shadow Sunset Pulse (W)
+                    </Link>
+                </td>
+                <td className="cart__main__tbody__item">
+                    <span>2999000</span>
+                </td>
+                <td className="cart__main__tbody__item">
+                    <input type="text" value={1} />
+                </td>
+                <td className="cart__main__tbody__item">
+                    <span>2999000</span>
 
-            </div>
-            <div className="cart__main__tbody__item">
-                <i className="far fa-trash-alt"></i>
-            </div>
-            </div>
+                </td>
+                <td className="cart__main__tbody__item">
+                    <i className="far fa-trash-alt"></i>
+                </td>
+            </tr>
+        </table>
             <div className="cart__main__checkout">
                 <div className="total">
                     Tổng tiền: <span>2990000</span>
@@ -54,11 +55,10 @@ const Cart = () => {
                     <button>Tiến hành thanh toán</button>
                     <Link to = "/">Tiếp tục mua hàng</Link>
                 </div>
-            </div>
-        </div>
-        {/* <div className="cart__empty">
+            </div> */}
+        <div className="cart__empty">
             <p>Giỏ hàng hiện tại của bạn chưa có sản phẩm nào</p>
-        </div> */}
+        </div>
     </div>
   )
 }

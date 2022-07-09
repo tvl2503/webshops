@@ -1,3 +1,4 @@
+@import "../GlobalStyles/mixin";
 .product-view__modal{
     width: 100%;
     position: fixed;
@@ -25,22 +26,41 @@
         max-width: 920px;
         background-color: #fff;
         display: flex;
+        @include mobile{
+            flex-direction: column;
+           
+        }
         .close--modal{
             position: absolute;
             top: 1%;
             right: 1%;
             font-size: 30px;
+            @include mobile{
+                top: 1%;
+                right: 3%;
+               
+            }
             cursor: pointer;
         }
         &__img{
             max-width: 430px;
             padding: 20px 15px;
+            text-align: center;
             img{
                 padding: 4px;
+                @include mobile{
+                    max-width: 60%;
+                    
+                }
             }
         }
         &__main{
             padding: 30px;
+            @include mobile{
+                text-align: center;
+                padding: 5px 30px;
+
+            }
             .title{
                 h1{
 
@@ -59,6 +79,10 @@
                 color: #de0c19;
                 font-size: 18px;
                 font-weight: 700;
+                @include mobile{
+                    margin-top: 5px;
+                margin-bottom: 5px;
+                }
             }
             .size{
                 display: flex;
@@ -96,6 +120,12 @@
                 padding-left: 20%;
                 margin-top: 30px;
                 margin-bottom: 30px;
+                @include mobile{
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    padding-left: 30%;
+
+                }
                 .btn__decrement, .btn__increment{
                     color: #a6a9b2;
                     text-align: center;
@@ -131,6 +161,10 @@
                 border-radius: .25rem;
                 line-height: 1.5;
                 font-size: 18px;
+                @include mobile{
+                    padding: 5px 10px;
+                    margin-bottom: 20px;
+                }
             }
         }
     }

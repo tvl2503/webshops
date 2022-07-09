@@ -1,7 +1,12 @@
+@import "../GlobalStyles/mixin";
 .product--card{
     margin-bottom: 25px;
     &__img{
         height: 280px;
+        @include mobile{
+            height: 190px;
+
+        }
         padding: 10px;
         position: relative;
         a{
@@ -18,14 +23,19 @@
             background-color: var(--main-second-bg);
             position: absolute;
             transform: translateY(280px);
+            padding: 13px 0;
             left: 0;
             width: 100%;
             color: var(--txt-second-color);
-            padding: 13px 0;
             font-size: 18px;
             font-weight: 700;
             text-transform: uppercase;
             cursor: pointer;
+            @include mobile{
+                transform: translateY(190px);
+                padding: 5px 0;
+                font-size: 14px;
+            }
         }
     }
     &__text{
@@ -34,13 +44,23 @@
         &__title{
             padding-top: 15px;
             font-size: 14px;
-            height: 75px;
+            min-height: 75px;
             font-weight: 700;
+            @include mobile{
+                padding-top: 5px;
+                font-size: 12px;
+                height: 50px;
+
+            }
         }
         &__price{
             font-size: 18px;
             padding-bottom: 10px;
+            @include mobile{
+                font-size: 14px;
+           
 
+            }
         }
     }
     &:hover{
@@ -53,6 +73,10 @@
             &__quickview{
                 opacity: 1;
                 transform: translateY(240px);
+                @include mobile{
+                    transform: translateY(160px);
+        
+                }
                 transition: transform  .5s ease;
             }
         }
