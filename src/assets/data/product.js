@@ -163,7 +163,7 @@ export const listProduct = [
         path: "Nike",
         products: [
             {
-                src : "https://mcdn.nhanh.vn/store3/97757/ps/20220315/15032022110350_9_1.jpg",
+                src : "https://mcdn.nhanh.vn/store3/97757/ps/20220315/15032022040342_3_1.jpeg",
                 name: "Giày Nike Air Jordan 1 Mid Black Racer Blue White - 41",
                 price: "4950000",
                 size: [40, 41, 42]

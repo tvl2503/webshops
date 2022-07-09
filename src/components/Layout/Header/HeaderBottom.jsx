@@ -29,19 +29,20 @@ const mainNav = [
 ]
 const HeaderBottom = () => {
     const menuRef = useRef(null)
-    const menuToggle = () => menuRef.current.classList.toggle('active')
+    const menuAdd = () => menuRef.current.classList.add('active')
+    const menuClose = () => menuRef.current.classList.remove('active')
   return (
     <div className="header__bottom">
-            <div className="header__bottom__mobile-toggle"  onClick={menuToggle}>
+            <div className="header__bottom__mobile-toggle"  onClick={menuAdd}>
                 <i className="far fa-bars"></i>
             </div>
-            <div className="header__bottom_img">
+            <div className="header__bottom__img">
                 <Link to = "/" >
                     <img src={logo} alt="logo" />
                 </Link>
             </div>
             <div className="header__bottom__menu" ref = {menuRef}>
-                <div className="header__bottom__menu__close"  onClick={menuToggle} >
+                <div className="header__bottom__menu__close"  onClick={menuClose} >
                     <p>close</p>
                     <i className="fal fa-times"></i>
                 </div>
@@ -52,7 +53,7 @@ const HeaderBottom = () => {
                     </button>
                 </div>
                 {mainNav.map((item, index) => (
-                    <div key = {index} className="header__bottom__menu__item" onClick={menuToggle}>
+                    <div key = {index} className="header__bottom__menu__item" onClick={menuClose}>
                         <Link to = {item.path} >
                             {item.name}
                         </Link>

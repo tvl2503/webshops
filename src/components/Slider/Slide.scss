@@ -11,6 +11,10 @@
     }
     &__control{
         padding: 0 50px;
+        @include mobile{
+            padding: 0 5px;
+            font-size: 1rem;
+        }
         position: absolute;
         display: flex;
         width: 100%;

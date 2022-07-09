@@ -11,7 +11,7 @@ const bannerCategory = [
     },
     {
         src : "https://mcdn.nhanh.vn/store3/97757/bn/danh_muc_02.jpg",
-        path: '/adidas',
+        path: '/phu-kien',
         title: "Phụ kiện quần áo"
     },
 ]

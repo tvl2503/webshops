@@ -13,7 +13,7 @@ const Cart = () => {
   return (
     <div className='cart container'>
         <Breadcrumb crumbs = {crumbs} />
-        {/* <div className="cart__main">
+        <div className="cart__main">
             <div className="cart__main__thead">
                 {
                     thead.map((item, index) => (
@@ -55,10 +55,10 @@ const Cart = () => {
                     <Link to = "/">Tiếp tục mua hàng</Link>
                 </div>
             </div>
-        </div> */}
-        <div className="cart__empty">
-            <p>Giỏ hàng hiện tại của bạn chưa có sản phẩm nào</p>
         </div>
+        {/* <div className="cart__empty">
+            <p>Giỏ hàng hiện tại của bạn chưa có sản phẩm nào</p>
+        </div> */}
     </div>
   )
 }

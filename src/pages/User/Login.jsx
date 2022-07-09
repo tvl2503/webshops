@@ -1,32 +1,43 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import Button from '../../components/Button'
-import Grid from '../../components/Grid'
 import "./User.scss"
 import { isValidEmail, isValidPassword } from '../../utils/validate'
 import { useState } from 'react'
 import Helmet from '../../components/Helmet'
+import { loginApi } from '../../service/auth/loginApis'
+import { publicRequest } from '../../service/requestMethod'
 const Login = () => {
     const initialValues = { email: "", password: ""}
     const [formValues, setFormValues] = useState(initialValues)
-    const [formErrors, setFormErrors] = useState({})
-    const [isSubmit, setIsSubmit] = useState(false)
+    const [formErrors, setFormErrors] = useState({ email: "", password: ""})
     const handleChange = ({ currentTarget: input }) => {
         setFormValues({...formValues,[input.name]: input.value })
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        setFormErrors(validate(formValues));
-        setIsSubmit(true)
+        setFormErrors(validate(formValues))
+        // if(!formErrors.email && !formErrors.password){
+        //     try{
+        //         const res = await publicRequest.post("/auth/login", formValues)
+        //         console.log(res.data);
+        //     }catch(err){
+        //         console.log(err);
+        //     }
+        // }
     }
-    useEffect(() => {
-        console.log(formErrors)
-        if(Object.keys(formErrors).length === 0 && isSubmit){
-            console.log(formValues);
+    const hanldeBlur = (e) => {
+        const name = e.target.name
+        const error = validate(formValues)
+        if(name  === "email"){
+            setFormErrors({...formErrors, [name] : error.email})
         }
-    }, [formErrors])
+        else if(name === "password"){
+            setFormErrors({...formErrors, [name] : error.password})
+
+        }
+    }
     const validate = (values) => {
-        const errors = {}
+        const errors = { email: "", password: ""}
         if(!values.email){
             errors.email = "Vui lòng nhập email!"
         }
@@ -34,12 +45,13 @@ const Login = () => {
             errors.email = "Vui lòng nhập đúng email!"
         }
         if(!values.password){
-            errors.password = "Vui lòng nhập password!"
+            errors.password = "Vui lòng nhập mật khẩu!"
         }
         else if(!isValidPassword(values.password)){
             errors.password = "Mật khẩu ít nhất 6 ký tự!"
 
         }
+        
         return errors
     }
   return (
@@ -53,15 +65,15 @@ const Login = () => {
                    <div className="login__content__form">
                        <form onSubmit={handleSubmit} >
                         <div className="field">
-                           <input type="text" placeholder='Email' name = "email" value={formValues.email} onChange={handleChange} />
+                           <input type="text" placeholder='Email' onBlur={(e) => hanldeBlur(e)} name = "email" value={formValues.email} onChange={handleChange} />
                            {formErrors.email && <p>{formErrors.email}</p>}
                         </div>
                         <div className="field">
-                           <input type="password" placeholder='Mật khẩu' name = "password"  value={formValues.password}  onChange={handleChange} />
+                           <input type="password" placeholder='Mật khẩu' onBlur={(e) => hanldeBlur(e)} name = "password"  value={formValues.password}  onChange={handleChange} />
                            {formErrors.password && <p>{formErrors.password}</p>}
 
                         </div>
-                           <Button>Đăng nhập</Button>
+                           <button >Đăng nhập</button>
                        </form>
                        <div className="forgot--password">
                            <Link to = "/forgot--password">Quên mật khẩu?</Link>

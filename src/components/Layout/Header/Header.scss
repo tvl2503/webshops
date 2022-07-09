@@ -74,6 +74,13 @@
         &__mobile-toggle{
             display: none;
         }
+        &__img{
+            img{
+              @include mobile{
+                width:  70%;
+              }  
+            }
+        }
         &__menu{
             display: flex;
             font-size: 1.125rem;
