@@ -1,6 +1,8 @@
 import Layout from "./components/Layout";
 import GlobalStyles from "./components/GlobalStyles";
 import { useSelector } from "react-redux";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   // const killCopy = (e) => {
   //   return false;
@@ -37,9 +39,11 @@ function App() {
   //   document.onclick = reEnable;
   // }
   return (
+    
     <GlobalStyles>
-      <Layout />
-    </GlobalStyles>
+        <ToastContainer autoClose={2000} />
+        <Layout />
+      </GlobalStyles>
   );
 }
 

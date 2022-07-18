@@ -1,9 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import './Button.scss'
-const Button = props => {
+const Button = (props) => {
   return (
-    <button onClick={props.onclick} className = 'btn'>
+    <button 
+            type={props.type || 'button'} 
+            onClick={props.onclick} 
+            className = {` btn`}
+            disabled={props.disabled}
+    >
         {props.children}
     </button>
   )

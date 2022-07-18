@@ -4,8 +4,9 @@ import "./User.scss"
 import { isValidEmail, isValidPassword } from '../../utils/validate'
 import { useState } from 'react'
 import Helmet from '../../components/Helmet'
-import { loginApi } from '../../service/auth/loginApis'
-import { publicRequest } from '../../service/requestMethod'
+import Button from '../../components/Button'
+import { toast } from 'react-toastify';
+
 const Login = () => {
     const initialValues = { email: "", password: ""}
     const [formValues, setFormValues] = useState(initialValues)
@@ -15,15 +16,7 @@ const Login = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
-        setFormErrors(validate(formValues))
-        // if(!formErrors.email && !formErrors.password){
-        //     try{
-        //         const res = await publicRequest.post("/auth/login", formValues)
-        //         console.log(res.data);
-        //     }catch(err){
-        //         console.log(err);
-        //     }
-        // }
+        toast.error("Chức năng chưa sử dụng được!")
     }
     const hanldeBlur = (e) => {
         const name = e.target.name
@@ -65,15 +58,17 @@ const Login = () => {
                    <div className="login__content__form">
                        <form onSubmit={handleSubmit} >
                         <div className="field">
-                           <input type="text" placeholder='Email' onBlur={(e) => hanldeBlur(e)} name = "email" value={formValues.email} onChange={handleChange} />
+                           <input type="text" placeholder='Email' onBlur={(e) => hanldeBlur(e)}
+                            name = "email" value={formValues.email} onChange={handleChange} />
                            {formErrors.email && <p>{formErrors.email}</p>}
                         </div>
                         <div className="field">
-                           <input type="password" placeholder='Mật khẩu' onBlur={(e) => hanldeBlur(e)} name = "password"  value={formValues.password}  onChange={handleChange} />
+                           <input type="password" placeholder='Mật khẩu' onBlur={(e) => hanldeBlur(e)}
+                            name = "password"  value={formValues.password}  onChange={handleChange} />
                            {formErrors.password && <p>{formErrors.password}</p>}
 
                         </div>
-                           <button >Đăng nhập</button>
+                           <Button type = "submit" disabled = { !isValidEmail(formValues.email) || !isValidPassword(formValues.password)}  >Đăng nhập</Button >
                        </form>
                        <div className="forgot--password">
                            <Link to = "/forgot--password">Quên mật khẩu?</Link>

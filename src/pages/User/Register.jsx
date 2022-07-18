@@ -5,31 +5,45 @@ import Button from '../../components/Button'
 import Grid from '../../components/Grid'
 import Helmet from '../../components/Helmet'
 import { isValidEmail, isValidPassword } from '../../utils/validate'
+import { toast } from 'react-toastify';
 
 import "./User.scss"
 
 const Register = () => {
     const initialValues = {fullName: "", email: "", password: "", phone: ""}
     const [formValues, setFormValues] = useState(initialValues)
-    const [formErrors, setFormErrors] = useState({})
-    const [isSubmit, setIsSubmit] = useState(false)
+    const [formErrors, setFormErrors] = useState({fullName: "", email: "", password: "", phone: ""})
 
     const handleChange = ({ currentTarget: input }) => {
         setFormValues({...formValues,[input.name]: input.value })
     }
+    const hanldeBlur = (e) => {
+        const name = e.target.name
+        const error = validate(formValues)
+        if(name  === "email"){
+            setFormErrors({...formErrors, [name] : error.email})
+        }
+        else if(name === "fullName"){
+            setFormErrors({...formErrors, [name] : error.fullName})
+
+        }
+        else if(name === "password"){
+            setFormErrors({...formErrors, [name] : error.password})
+
+        }
+        else if(name === "phone"){
+            setFormErrors({...formErrors, [name] : error.phone})
+
+        }
+    }
     const handleSubmit = (e) => {
         e.preventDefault()
-        setFormErrors(validate(formValues));
-        setIsSubmit(true)
+        toast.error("Chức năng chưa sử dụng được!")
+       
     }
-    useEffect(() => {
-        console.log(formErrors)
-        if(Object.keys(formErrors).length === 0 && isSubmit){
-            console.log(formValues);
-        }
-    }, [formErrors])
+
     const validate = (values) => {
-        const errors = {};
+        const errors = {fullName: "", email: "", password: "", phone: ""};
         if(!values.fullName){
             errors.fullName = "Vui lòng nhập họ và tên";
         }
@@ -66,22 +80,31 @@ const Register = () => {
                                 name = "fullName" 
                                 value={formValues.fullName} 
                                 placeholder='Họ và Tên'  
-                                onChange={handleChange}  />
+                                onBlur = {(e) => hanldeBlur(e)}
+                                onChange={handleChange}  />  
                                 {formErrors.fullName && <p>{formErrors.fullName}</p>}
                            </div>
                            <div className="field">
-                                <input type="text" placeholder='Email' name = "email" value={formValues.email}    onChange={handleChange} />
+                                <input type="text" placeholder='Email' name = "email" value={formValues.email}  
+                                onBlur = {(e) => hanldeBlur(e)}  onChange={handleChange} />
                                 {formErrors.email && <p>{formErrors.email}</p>}
                             </div>
                            <div className="field">
-                                 <input type="password" placeholder='Mật khẩu' name = "password" value={formValues.password}  onChange={handleChange}  />
+                                 <input type="password" placeholder='Mật khẩu' name = "password" value={formValues.password} 
+                                 onBlur = {(e) => hanldeBlur(e)}  onChange={handleChange}  />
                                  {formErrors.password && <p>{formErrors.password}</p>}
                             </div>
                            <div className="field">
-                                <input type="text" name = "phone"  placeholder='Điện Thoại' onChange={handleChange}  />
+                                <input type="text" name = "phone"  placeholder='Điện Thoại' 
+                                onBlur = {(e) => hanldeBlur(e)} onChange={handleChange}  />
                                 {formErrors.phone && <p>{formErrors.phone}</p>}
                             </div>
-                           <Button>Đăng Ký</Button>
+                           <Button type = "submit" 
+                           disabled = { !isValidEmail(formValues.email) 
+                                        || !isValidPassword(formValues.password) 
+                                        || !formValues.phone 
+                                        || !formValues.fullName}
+                             >Đăng Ký</Button>
                        </form>
                        <div className="forgot--password">
                            <Link to = "/user/login"><i class="fal fa-arrow-left"></i>Đã có tài khoản</Link>
