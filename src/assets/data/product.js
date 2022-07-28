@@ -159,7 +159,7 @@ const products = [
 
 export const listProduct = [
     {
-        title: "Giày Nike",
+        name: "Giày Nike",
         path: "Nike",
         products: [
             {
@@ -213,7 +213,7 @@ export const listProduct = [
         ]
     },
     {
-        title: 'Giày adidas',
+        name: 'Giày adidas',
         path: "adidas",
         products: [
             {
@@ -273,7 +273,7 @@ export const listProduct = [
         ]
     },
     {
-        title: "Giày MLB",
+        name: "Giày MLB",
         path: "MLB",
         products: [
             {
@@ -351,7 +351,7 @@ export const listProduct = [
         ]
     },
     {
-        title: "Phụ Kiện",
+        name: "Phụ Kiện",
         path: "phu-kien",
         products: [
             {

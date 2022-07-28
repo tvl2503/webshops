@@ -33,6 +33,13 @@
 
         border-left: 1px solid #ccc;
         &__form{
+            p{
+
+                color: #df4a32;
+                font-size: 12px;
+                margin-top: 10px;
+                font-weight: 600;
+            }
             text-align: start;
             padding-left: 100px;
             padding-right: 100px;
@@ -43,6 +50,7 @@
             form{
                 display: flex;
                 flex-direction: column;
+                margin-top: 10px;
                 .field{
                     margin-bottom: 30px;
                     input{
@@ -57,12 +65,7 @@
                         font-weight: 500;
                         color: #252a2b;
                     }
-                    p{
-                        color: #df4a32;
-                        font-size: 12px;
-                        margin-top: 10px;
-                        font-weight: 600;
-                    }
+                    
                 }
                 button{
                     margin: auto;
@@ -96,7 +99,7 @@
             position: relative;
             span{
                 position: absolute;
-                z-index: 999;
+                z-index: 99;
                 background-color: #fff;
                 padding: 0 10px;
                 left: 44%;

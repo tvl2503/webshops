@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 
 
-import productViewModal from "../components/ProductViewModal/productModalSlice";
+import productViewModalSlice from '../components/ProductViewModal/productModalSlice';
 
+import authSlice from '../service/auth/authSlice';
 const rootReducer = combineReducers({
-    productModal : productViewModal
+    productModal : productViewModalSlice,
+    auth: authSlice
 })
 
 export default rootReducer;

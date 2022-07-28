@@ -1,8 +1,9 @@
 import Layout from "./components/Layout";
 import GlobalStyles from "./components/GlobalStyles";
-import { useSelector } from "react-redux";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useCallback, useEffect, useState } from "react";
+import agent from "./service/agent";
 function App() {
   // const killCopy = (e) => {
   //   return false;
@@ -38,11 +39,25 @@ function App() {
   //   document.onmousedown = killCopy;
   //   document.onclick = reEnable;
   // }
+  const [category, setCategory] = useState({});
+  const getCate = useCallback(async () => {
+    try{
+      const cate = await agent.Category.getAllCategory();
+      setCategory(cate)
+    }
+    catch(err){
+      setCategory({})
+    }
+  }, [])
+  useEffect(() => {
+    getCate()
+  }, [getCate])
   return (
     
     <GlobalStyles>
         <ToastContainer autoClose={2000} />
-        <Layout />
+        {category.length > 0 && <Layout category = {category} />}
+        
       </GlobalStyles>
   );
 }

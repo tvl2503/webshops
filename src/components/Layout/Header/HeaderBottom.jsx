@@ -1,5 +1,6 @@
 import React,{ useRef } from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
 const logo  = "https://res.cloudinary.com/fef/image/upload/v1656410485/nhanh_fycbje.png";
 const mainNav = [
     {
@@ -7,15 +8,15 @@ const mainNav = [
         path: "nike"
     },
     {
-        name: "Giày adidas",
+        name: "Giày Adidas",
         path: "adidas", 
     },
     {
-        name: "Giày mlb",
+        name: "Giày MLB",
         path: "mlb", 
     },
     {
-        name: "Phụ kiện",
+        name: "Phụ Kiện",
         path: "phu-kien", 
     },
     {
@@ -29,8 +30,8 @@ const mainNav = [
 ]
 const HeaderBottom = () => {
     const menuRef = useRef(null)
-    const menuAdd = () => menuRef.current.classList.add('active')
-    const menuClose = () => menuRef.current.classList.remove('active')
+    const menuAdd = () => menuRef.current.classList?.add('active')
+    const menuClose = () => menuRef.current.classList?.remove('active')
   return (
     <div className="header__bottom">
             <div className="header__bottom__mobile-toggle"  onClick={menuAdd}>
@@ -59,13 +60,18 @@ const HeaderBottom = () => {
                         </Link>
                     </div>
                 ))}
-                <div className="header__bottom__menu__user">
-                    <div className="header__bottom__menu__user__item">
-                        Đăng nhập
-                    </div>
-                    <div className="header__bottom__menu__user__item">
-                        Đăng ký
-                    </div>
+                <div className="header__bottom__menu__user" onClick={menuClose}>
+                    <Link to = "/user/login">
+                        <div className="header__bottom__menu__user__item">
+                            Đăng nhập
+                        </div>
+                    </Link>
+                    <Link to = "/user/register">
+
+                        <div className="header__bottom__menu__user__item">
+                            Đăng ký
+                        </div>
+                    </Link>
                 </div>
             </div>
             <div className="header__bottom__cart">

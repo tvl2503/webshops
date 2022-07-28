@@ -1,5 +1,5 @@
 import React from 'react'
-import Nike from '../Nike'
+import Nike from '../Products'
 import { getAllProducts } from '../../assets/data/product'
 const Product = () => {
   return (

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import "./ProductCard.scss"
 import numberWithVND from '../../utils/numberwithvnd'
-import { addProductModal } from '../../redux/action'
+import { addProductModal } from '../ProductViewModal/productModalSlice'
 
 
 import { useDispatch } from 'react-redux';
@@ -19,8 +19,8 @@ const ProductCard = ({product}) => {
   return (
     <div className='product--card'>
         <div className="product--card__img">
-         <Link to = "/">
-            <img src={product.src} alt="" />
+         <Link to = {`/product/${product._id}`}>
+            <img src={product.image[0]} alt="" />
          </Link>
         <div className="product--card__img__quickview" onClick={handleAddProduct} >
           <i class="fal fa-eye"></i>
@@ -29,7 +29,7 @@ const ProductCard = ({product}) => {
         </div>
         <div className="product--card__text">
           <p className="product--card__text__title">
-              <Link to = "">
+              <Link to = {`/product/${product._id}`}>
                 {product.name}
               </Link>
           </p>

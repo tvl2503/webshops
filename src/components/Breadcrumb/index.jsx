@@ -16,7 +16,7 @@ const Breadcrumb = props => {
             if(index < props.crumbs.length - 1 )
             {
               return (
-                <li className={`breadcrumb__item`}>
+                <li key = {index} className={`breadcrumb__item`}>
                     <Link to = {item.href} >
                         {item.title}
                     </Link>

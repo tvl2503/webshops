@@ -1,20 +1,17 @@
-const initState = {
-    product: null
-}
-const productViewModal = (state = initState, action) => {
-    switch (action.type){
-        case 'productModal/set': 
-            return {
-                ...state,
-                product: action.payload
-            }
-        case 'productModal/remove':
-            return {
-                ...state,
-                product: null
-            }
-        default: 
-            return state
+import { createSlice } from "@reduxjs/toolkit";
+const productViewModalSlice = createSlice({
+    name: "productModal",
+    initialState: {
+        product: null
+    },
+    reducers: {
+        addProductModal: (state, action) => {
+            state.product = action.payload
+        },
+        removeProductModal: (state) => {
+            state.product = null
+        }
     }
-}
-export default productViewModal
+})
+export const {addProductModal, removeProductModal} = productViewModalSlice.actions
+export default productViewModalSlice.reducer

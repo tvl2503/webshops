@@ -12,7 +12,11 @@
     width: 100%;
     background-color: var(--main-bg);
     border-bottom: 1px solid #ddd;
-
+    @include tablet{
+        .container{
+            padding: 0;
+        }
+    }
     &__top{
         max-width: 1100px;
         padding: 2px 15px;
@@ -50,9 +54,23 @@
         &__user{
             
             display: flex;
+            align-items: center;
             &__item{
                 padding-right: 10px;
 
+            }
+            .logout{
+                cursor: pointer;
+                margin-left: 20px;
+                padding: 5px 10px;
+                background-color: #DE0000;
+                color: #f1f1f1;
+                border-radius: 20px;
+                border: 1px solid #DE0000;
+                &:hover{
+                    background-color: #fff;
+                    color: #000;
+                }
             }
         }
         @include tablet{
@@ -72,6 +90,7 @@
         width: 100%;
         padding: 0 15px;
         &__mobile-toggle{
+            cursor: pointer;
             display: none;
         }
         &__img{
@@ -88,6 +107,8 @@
             font-weight: 700;
             &__close{
                 display: none;
+                cursor: pointer;
+
             }
             &__user{
                 display: none;

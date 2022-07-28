@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { removeProductModal } from '../../redux/action'
+import {removeProductModal} from './productModalSlice'
 import numberWithVND from '../../utils/numberwithvnd'
 import "./ProductViewModal.scss"
 const ProductViewModal = () => {
     const dispatch = useDispatch()
-    const product = useSelector(state => state.productModal.product)
+    const {product} = useSelector(state => state.productModal)
     const [size, setSize] = useState(null);
     const [quantity, setQuantity] = useState(1);
     const removeModal = () => {
@@ -33,7 +33,7 @@ const ProductViewModal = () => {
                         <i class="far fa-times"></i>
                     </div>
                     <div className="product-view__modal__content__img">
-                        <img src = {product.src} />
+                        <img src = {product.image[0]} />
                     </div>
                     <div className="product-view__modal__content__main">
                         <div className="title">

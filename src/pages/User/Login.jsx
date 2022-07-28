@@ -1,14 +1,21 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import "./User.scss"
-import { isValidEmail, isValidPassword } from '../../utils/validate'
+import { isValidEmail, isValidPassword } from '../../utils/validate';
+import { useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react'
 import Helmet from '../../components/Helmet'
 import Button from '../../components/Button'
-import { toast } from 'react-toastify';
 
+import { login, logout, selectErrors, selectIsLoading, selectUser } from '../../service/auth/authSlice';
 const Login = () => {
     const initialValues = { email: "", password: ""}
+    const dispatch = useDispatch();
+    const error = useSelector(selectErrors);
+    const navigate = useNavigate();
+    const inProgress = useSelector(selectIsLoading);
+    const user = useSelector(selectUser)
     const [formValues, setFormValues] = useState(initialValues)
     const [formErrors, setFormErrors] = useState({ email: "", password: ""})
     const handleChange = ({ currentTarget: input }) => {
@@ -16,7 +23,9 @@ const Login = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
-        toast.error("Chức năng chưa sử dụng được!")
+        dispatch(login(formValues))
+    
+  
     }
     const hanldeBlur = (e) => {
         const name = e.target.name
@@ -47,6 +56,12 @@ const Login = () => {
         
         return errors
     }
+    useEffect(() => {
+        if(user){
+            navigate("/")
+        }
+        dispatch(logout)
+    }, [user, error])
   return (
     <Helmet title = "Đăng nhập">
 
@@ -55,7 +70,9 @@ const Login = () => {
                    <h1>Đăng nhập</h1>
                </div>
                <div className="login__content">
+
                    <div className="login__content__form">
+                        {error && <p>Email hoặc mật khẩu không đúng !</p>}
                        <form onSubmit={handleSubmit} >
                         <div className="field">
                            <input type="text" placeholder='Email' onBlur={(e) => hanldeBlur(e)}
@@ -68,7 +85,10 @@ const Login = () => {
                            {formErrors.password && <p>{formErrors.password}</p>}
 
                         </div>
-                           <Button type = "submit" disabled = { !isValidEmail(formValues.email) || !isValidPassword(formValues.password)}  >Đăng nhập</Button >
+                           <Button type = "submit"  disabled = { !isValidEmail(formValues.email) || !isValidPassword(formValues.password)}>
+                            {inProgress? <div className="loader"></div> : 'Đăng nhập'}
+                            </Button >
+                      
                        </form>
                        <div className="forgot--password">
                            <Link to = "/forgot--password">Quên mật khẩu?</Link>

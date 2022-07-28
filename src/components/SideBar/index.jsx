@@ -3,12 +3,8 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import "./SideBar.scss"
 import Slider from '@mui/material/Slider';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import numberWithVND from '../../utils/numberwithvnd';
-import FormGroup from '@mui/material/FormGroup';
-import { red } from '@mui/material/colors';
-import { grey } from '@mui/material/colors';
+import { createTheme, ThemeProvider  } from '@mui/material/styles';
 import { useEffect } from 'react';
 import { filterProduct } from '../../Context/Context';
 const category = [
@@ -29,7 +25,16 @@ const category = [
     path: "/phu-kien"
   },
 ]
-const size = [42,41,40,39,38,37,36]
+const theme = createTheme({
+  palette: {
+    secondary: {
+      light: '#ff7961',
+      main: '#f44336',
+      dark: '#ba000d',
+      contrastText: '#000',
+    },
+  },
+});
 const SideBar = props => {
   const { handleFilterProduct} = useContext(filterProduct);
   const [hideCate, setHideCate] = useState(false);
@@ -38,8 +43,7 @@ const SideBar = props => {
   const [valuePrice, setValuePrice] = useState([0, 5000000]);
 
   useEffect(() => {
-    const fillProduct = props.products.filter((item) => item.price >= valuePrice[0] && item.price <= valuePrice[1]);
-    handleFilterProduct(fillProduct);
+    handleFilterProduct(valuePrice);
   }, [valuePrice])
 
   const handleChange = (event, newValue) => {
@@ -60,7 +64,7 @@ const SideBar = props => {
               <div key = {index} className="category__list__item">
                 <Link to = {item.path} className = {`${index === props.index ? 'active': ''} ${props.index === -1 ? 'active' : ''}`}>
                 {item.title}
-                <input type="checkbox"  checked={index === props.index}  />
+                <input type="checkbox"   checked={index === props.index} />
                   <span className='checkmark'></span>
                 </Link>
               </div>
@@ -77,13 +81,17 @@ const SideBar = props => {
           </div>
            { !hidePrice && 
           <div className="price--range__input">
-           <Slider  
-              min = {0}
-              max = {5000000}
-              value={valuePrice}
-              onChange={handleChange}
-               valueLabelDisplay="auto"
-              />
+            <ThemeProvider theme = {theme} >
+
+              <Slider 
+                  min = {0}
+                  max = {5000000}
+                  value={valuePrice}
+                  onChange={handleChange}
+                  valueLabelDisplay="auto"
+                  color= "secondary"
+                  />
+            </ThemeProvider>
             <div className="price--range__input__text">
               <span>{numberWithVND(valuePrice[0])}</span>
               -
