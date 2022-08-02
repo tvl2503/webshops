@@ -7,7 +7,7 @@ import Login from '../../pages/User/Login'
 import Register from '../../pages/User/Register'
 import Footer from './Footer'
 import Header from './Header'
-
+import Search from '../../pages/Search'
 import Contact from '../../pages/Contact'
 import ProductViewModal from '../ProductViewModal'
 import Cart from '../../pages/Cart'
@@ -36,6 +36,7 @@ const Layout = ({category}) => {
               <Route path = "login" element = {<Login />} />
               <Route path = "register" element = {<Register />} />
             </Route>
+            <Route path = "search" element = {<Search />} />
             <Route path = "*" element = {<NotFound/>} />
         </Routes>
         <Footer />

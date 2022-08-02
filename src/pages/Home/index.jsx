@@ -15,7 +15,7 @@ const Home = ({category}) => {
         <div className='home'>
         <Slider />
         <BannerCategory />
-        {/* <FeatureProduct products = {products}  /> */}
+        <FeatureProduct category = {category}  />
         <WhyNote data = {policy} />
         {
           category.map((item, index) => (

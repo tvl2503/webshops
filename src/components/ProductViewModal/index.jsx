@@ -3,9 +3,16 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {removeProductModal} from './productModalSlice'
 import numberWithVND from '../../utils/numberwithvnd'
+import Button from '../Button'
+import { addTocart } from '../../service/cart/cartSlice';
+import {selectUser} from '../../service/auth/authSlice'
+import { toast } from 'react-toastify';
+
 import "./ProductViewModal.scss"
 const ProductViewModal = () => {
     const dispatch = useDispatch()
+  const user = useSelector(selectUser)
+
     const {product} = useSelector(state => state.productModal)
     const [size, setSize] = useState(null);
     const [quantity, setQuantity] = useState(1);
@@ -18,6 +25,15 @@ const ProductViewModal = () => {
     const handleDecrement = () => {
         setQuantity(state => state  > 1 ? state - 1 : state)
     }
+    const handleClick = () => {
+        if(user){
+          dispatch(addTocart({productId: product._id, quantity, size, price: product.price, name: product.name, img: product.image[0] }))
+          toast.success("Thêm vào giỏ hàng thành công")
+        }
+        else{
+    
+        }
+      }
     useEffect(() => {
         setSize(null);
         setQuantity(1);
@@ -65,7 +81,7 @@ const ProductViewModal = () => {
                                 <i class="fal fa-plus"></i>
                             </div>
                         </div>
-                        <button className='btn--add--cart'>Thêm vào giỏ hàng</button>
+                        <Button type = "submit" className='btn--add--cart' onclick = {handleClick} disabled = {!size} ><i className="fal fa-cart-plus"></i> Thêm vào giỏ hàng</Button>
                     </div>
                 </div>
             </div>

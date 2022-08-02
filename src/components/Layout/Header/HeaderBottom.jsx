@@ -1,6 +1,10 @@
-import React,{ useRef } from 'react'
+import React,{ useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUser } from '../../../service/auth/authSlice';
+import { useEffect } from 'react';
+import { getToCart } from '../../../service/cart/cartSlice';
 const logo  = "https://res.cloudinary.com/fef/image/upload/v1656410485/nhanh_fycbje.png";
 const mainNav = [
     {
@@ -20,18 +24,27 @@ const mainNav = [
         path: "phu-kien", 
     },
     {
-        name: "Tin tức chung",
-        path: "tin-tuc-chung", 
-    },
-    {
         name: "Liên hệ",
         path: "contact", 
     },
 ]
 const HeaderBottom = () => {
+    const {quantity} = useSelector((state) => state.cart)
     const menuRef = useRef(null)
+    const [keyword, setKeyword] = useState('')
+    const navigate = useNavigate();
     const menuAdd = () => menuRef.current.classList?.add('active')
     const menuClose = () => menuRef.current.classList?.remove('active')
+    const handeChange = (e) => {
+        setKeyword(e.target.value)
+  
+    }
+    const handleSumbit = () => {
+        menuRef.current.classList?.remove('active')
+
+        navigate('search?q='+keyword)
+    }
+
   return (
     <div className="header__bottom">
             <div className="header__bottom__mobile-toggle"  onClick={menuAdd}>
@@ -48,8 +61,8 @@ const HeaderBottom = () => {
                     <i className="fal fa-times"></i>
                 </div>
                 <div className="header__bottom__menu__search">
-                    <input type="text" placeholder='search' />
-                    <button>
+                    <input type="text" placeholder='search' onChange={handeChange} />
+                    <button onClick={handleSumbit}>
                         <i className="fal fa-search"></i>
                     </button>
                 </div>
@@ -77,6 +90,8 @@ const HeaderBottom = () => {
             <div className="header__bottom__cart">
                 <Link to = "cart">
                     <i className="fal fa-shopping-cart"></i>
+
+                    {quantity > 0 && <div className='cart--quantity'>{quantity}</div>}
                 </Link>
             </div>
         </div>

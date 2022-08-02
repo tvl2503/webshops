@@ -2,14 +2,33 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Grid from '../../components/Grid'
 import ProductCard from '../../components/ProductCard'
-
-const FeatureProduct = ({products}) => {
+import { useCallback } from 'react'
+import agent from '../../service/agent'
+import Loading from '../../components/Loading'
+import { useEffect } from 'react'
+const FeatureProduct = ({category}) => {
     const [selectOption, setSelectOption] = useState(0)
-    const [product, setProduct] = useState(products[0].product)
-    const handleSelected = (item, index) => {
+    const [products, setProducts] = useState({})
+    const [loading, setLoading] = useState(false)
+
+    const getProduct =  useCallback(async (id) => {
+        try{
+            const pro = await agent.Product.getProductByCate(id)
+            setLoading(false)
+            setProducts(pro.productsList)
+          }
+          catch(err){
+            setProducts({})
+            setLoading(false)
+          }
+    }, [selectOption])
+    const handleSelected = (id, index) => {
+        getProduct(id)
         setSelectOption(index)
-        setProduct(item.product)
     }
+    useEffect(() => {
+        getProduct(category[0]._id)
+    }, [])
   return (
     <div className='feature--product'>
         <div className="container">
@@ -24,13 +43,13 @@ const FeatureProduct = ({products}) => {
         <div className="feature--product__menu">
             <div className="feature--product__menu__tap">
                 <div className="feature--product__menu__tap__caption">
-                    <Grid col = {5} mdCol = {4} smCol = {3} >
+                    <Grid col = {4} mdCol = {3} smCol = {2} >
 
                     {
-                        products.map((item, index) => (
+                        category.map((item, index) => (
                             <div key = {index} 
                             className={`feature--product__menu__tap__caption__item ${index === selectOption ? 'active': ''} `}
-                            onClick = {() => handleSelected(item, index)}
+                            onClick = {() => handleSelected(item._id, index)}
                             >
                                 {item.name}
                             </div>
@@ -38,13 +57,17 @@ const FeatureProduct = ({products}) => {
                     }
                     </Grid>
                 </div>
+                {loading && <Loading />}
+                {products.length > 0 &&
+                
                 <div className="feature--product__menu__tap__content">
                     <Grid col = {4} mdCol = {3} smCol = {2} gap = {30} >
-                        {product.map((item, index) => (
+                        {products.map((item, index) => (
                             <ProductCard key = {index} product = {item} />
                         ))}
                     </Grid>
                 </div>
+                }
             </div>
         </div>
         <div className="feature--product__other">

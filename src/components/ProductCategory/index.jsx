@@ -6,27 +6,29 @@ import Grid from '../Grid'
 import ProductCard from '../ProductCard'
 import agent from '../../service/agent'
 import { useEffect } from 'react'
+import Loading from "../Loading"
 const img =  "https://res.cloudinary.com/fef/image/upload/v1656410809/banner-mid_viarpe.png"
 const ProductCategory = ({ title, path, id}) => {
   const [products, setProducts] = useState({});
-  
+  const [loading, setLoading] = useState(false)
   const getProduct =  async () => {
+    setLoading(true)
     try{
       const pro = await agent.Product.getProductByCate(id)
+      setLoading(false)
       setProducts(pro.productsList)
+ 
     }
     catch(err){
       setProducts({})
+      setLoading(false)
     }
   }
   useEffect(() => {
     getProduct()
   }, [id])
   return (
-    <>
-      {products.length > 0 &&
-        <div className='product--category'>
-          
+        <div className='product--category'>          
             <div className="product--category__banner">
                 <Link to={"/"}>
                     <img src={img} alt="" />
@@ -37,10 +39,16 @@ const ProductCategory = ({ title, path, id}) => {
                 </div>
             </div>
             <div className="container">
-              <Grid col = {4} mdCol = {3} smCol = {2} gap = {30} >
-                {products.map((item, index) => (
+                {loading &&
+                  <Loading />
+                }
+              <Grid col = {4} mdCol = {3}  smCol = {2} gap = {30} >
+                {
+                  products.length > 0 &&
+                  products.map((item, index) => (
                   <ProductCard product ={item}  key = {index} />
-                ))}
+                ))
+                }
               </Grid>
             </div>
             <div className="feature--product__other">
@@ -48,9 +56,6 @@ const ProductCategory = ({ title, path, id}) => {
               
             </div>
         </div>
-       }
-    </>
-
   )
 }
 

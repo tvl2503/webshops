@@ -9,6 +9,8 @@ import "./Products.scss"
 import { useEffect } from 'react';
 import Helmet from '../../components/Helmet';
 import agent from '../../service/agent';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 const banner = "https://mcdn.nhanh.vn/store3/97757/bn/Banner_Mule_1400x600.jpg"
 
 
@@ -20,31 +22,38 @@ const Products = ({path, brumb, index, id}) => {
     }
   ]
   const [products, setProducts] = useState({});
-  const [rangePrice, setRangePrice] = useState({})
+  const [rangePrice, setRangePrice] = useState([0, 5000000])
+  const [totalPage, setTotalPage] = useState(1)
+  const [page, setPage] = useState(1)
+  const handleChangePage = (e) => {
+    setPage(e)
+  }
   const getProduct = useCallback(async () => {
       try{
-        const pro = await agent.Product.getProductByCate(id)
+        const pro = await agent.Product.getProductByCate(id, rangePrice,page)
         setProducts(pro.productsList)
+        setTotalPage(pro.totalPages)
       }
       catch(err){
         setProducts({})
       }
-  }, [id])
-  const handleFilterProduct = (filter) => {
-    setRangePrice(filter)
+  }, [id, rangePrice,page])
+  const handleFilterProduct = (value) => {
+    setRangePrice(value)
   }
   useEffect(() => {
     getProduct()
   }, [getProduct])
   return (
     <Helmet title = {brumb}>
-    <filterProduct.Provider value = {{ handleFilterProduct}}>
+    <filterProduct.Provider value = {{ handleFilterProduct, rangePrice}}>
         <Banner src = {banner}  />
         <Breadcrumb crumbs = {crumbs} />
         <div className="container content" >
           <SideBar index = {index}  />
           <div className="content--list--product">
             {products.length > 0 &&
+            <>
             <Grid col = {3} mdCol = {2} gap = {20}>
               {
                 products.map((item, index) => (
@@ -53,12 +62,14 @@ const Products = ({path, brumb, index, id}) => {
               }
             </Grid>
             
-            }
-          {/* <div className="pagination">
+          <div className="pagination">
             <Stack spacing={2}>
-              <Pagination count={Math.floor(products.length / 10) + 1} color="secondary" onChange={(e) => handleChangePage(e.target.textContent)} />
+              <Pagination count={totalPage} color="secondary" onChange={(e) => handleChangePage(e.target.textContent)} />
             </Stack>
-          </div> */}
+          </div>
+          </>
+
+            }
           </div>
         </div>
     </filterProduct.Provider>

@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectUser, logout } from '../../../service/auth/authSlice'
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
-import { getAllProducts } from '../../../assets/data/product';
+import agent from '../../../service/agent';
+import { remove, getToCart } from '../../../service/cart/cartSlice';
 const HeaderTop = () => {
     const user = useSelector(selectUser)
     const dispatch = useDispatch();
@@ -16,18 +17,44 @@ const HeaderTop = () => {
   
     }
     const handleSearch = useCallback(
-        () => {
+        async () => {
           let product = []
           if(keyword !== '')
-            product = getAllProducts().filter(item => item.name.toLowerCase().includes(keyword.toLowerCase()))
-          setProducts(product)
+          {
+            try{
+                product = await agent.Product.searchProductByKeyword(keyword)
+                setProducts(product)
+            }catch(err){
+                setProducts({})
+            }
+
+          }
+          else{
+            setProducts({})
+          }
         }, [keyword]
       );
+    const getCart = useCallback(() => {
+        dispatch(getToCart())
+    }, [user])
+    const onClickProduct = (url) => {
+        if(keyword !== ''){
+            setKeyword('')
+            navigate(url)
+        }
+    }
     useEffect(() => {
         handleSearch()
-    }, [keyword])
+    }, [handleSearch])
+    useEffect(() => {
+        getCart()
+    },[getCart])
+    const handleSumbit = () => {
+        navigate('search?key='+keyword)
+    }
     const handleLogout = () => {
         dispatch(logout())
+        dispatch(remove())
         navigate('/user/login')
         toast.success("Đăng xuất thành công!")
     }
@@ -45,29 +72,30 @@ const HeaderTop = () => {
                 </div>
             </div>
             <div className="header__top__search">
-                <form action="">
+                <form action="" onSubmit={handleSumbit}>
                     <button type='submit'>
                         <i className="fas fa-search"></i>
                     </button>
                     <input type="text" name = "q" onChange={handeChange} value = {keyword} placeholder='Tìm kiếm sản phẩm' />
                 </form>
-                <div className="list__product">
-                    {/* {products &&
-                        products.map((item, index) => (
-                            <Link to={"/"} key = {index}>
-                                <div className="product">
+                
+                    {products.length > 0 &&
+                    <div className="header__top__search__product">
+                        {products.map((item, index) => (
+                                <div className="product" key = {index} onClick = {() => onClickProduct(`product/${item._id}`)}>
                                     <div className="img">
-                                        <img src = {item.img} />
+                                        <img src = {item.image[0]} />
                                     </div>
                                     <div className="content">
                                         <div className="name">{item.name}</div>
                                         <div className="price">{item.price}</div>
                                     </div>
                                 </div>
-                            </Link>
                         ))
-                    } */}
-                </div>
+                        }
+                        </div>
+                    }
+                
             </div>
             <div className="header__top__user">
                 {

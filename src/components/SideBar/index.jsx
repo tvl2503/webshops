@@ -36,11 +36,11 @@ const theme = createTheme({
   },
 });
 const SideBar = props => {
-  const { handleFilterProduct} = useContext(filterProduct);
+  const { handleFilterProduct,rangePrice} = useContext(filterProduct);
   const [hideCate, setHideCate] = useState(false);
   const [hidePrice, setHidePrice] = useState(false);
   const [hideSize, setHideSize] = useState(false);
-  const [valuePrice, setValuePrice] = useState([0, 5000000]);
+  const [valuePrice, setValuePrice] = useState(rangePrice);
 
   useEffect(() => {
     handleFilterProduct(valuePrice);

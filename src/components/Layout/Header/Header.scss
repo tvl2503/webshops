@@ -44,11 +44,36 @@
             border: 2px solid #ddd;
             padding: 5px;
             border-radius: 20px;
+            position: relative;
             input, button{
                 border: none;
                 background-color: #fff;
                 padding: 2px 4px;
                 outline: none;
+            }
+            &__product{
+                position: absolute;
+                top: 40px;
+                background-color: #f6f6f6;
+                min-width: 300px;
+                overflow-y: auto;
+                max-height: 300px;
+                padding: 5px;
+                z-index: 999;
+                .product{
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    .img{
+                        width: 25%;
+                    }
+                    .content{
+                        margin-left: 5px;
+                        display: flex;
+                        flex-direction: column;
+                        text-align: center;
+                    }
+                }
             }
         }
         &__user{
@@ -208,6 +233,21 @@
             color: var(--main-second-bg);
             font-size: 1.2rem;
             font-weight: 700;
+            position: relative;
+            padding: 10px;
+            .cart--quantity{
+                position: absolute;
+                top: 0;
+                right: 0;
+                font-size: 13px;
+                line-height: 20px;
+                background: #DE0000;
+                color: #fff;
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                border-radius: 50%;
+            }
         }
         display: flex;
         justify-content: space-between;

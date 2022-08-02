@@ -90,6 +90,12 @@
             font-weight: 600;
             font-size: 25px;
             margin: 20px 0;
+            display: flex;
+            &__old{
+                color: #cccccc;
+                margin-left: 20px;
+                text-decoration: line-through;
+            }
         }
         .size{
             display: flex;

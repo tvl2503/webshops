@@ -1,6 +1,6 @@
 import { BASE_URL } from "../constants/api";
 import axios from 'axios'
-let token = null;
+
 function serialize(object) {
     const params = [];
   
@@ -14,20 +14,23 @@ function serialize(object) {
   }
   
 const agent = async (url, body, method = "GET") => {
-    const headers  = new Headers();
+    let header = ""
+    let token = localStorage.getItem("token")
     if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
+        header =  `Bearer ${token}`;
     }
+ 
     try{
         const {data} = await axios({
             method: method,
             url: `${BASE_URL}${url}`,
-            headers : headers || {},
+            headers : {token: header} ,
             data: body? body: undefined
         });
+      
        return data
     }catch(error){
-        console.log(error);
+   
         throw error 
     }
 }
@@ -59,16 +62,21 @@ const Auth = {
 }
 const Product = {
     getProductByID: (id) => requests.get('product/' + id),
-    getProductByCate: (cate) => requests.get('product?cate=' + cate )
+    getProductByCate: (cate, rangePrice = [0,5000000],page = 1) => requests.get(`product?cate=${cate}&priceMin=${rangePrice[0]}&priceMax=${rangePrice[1]}&page=${page}` ),
+    searchProductByKeyword: (keyword) => requests.get('product/search/' + keyword)
 }
 const Category = {
     getAllCategory: (id) => requests.get("category")
+}
+const Cart = {
+    addToCart: (productId, quantity, size, price, name, img) => 
+        requests.post('cart/user', {products: {productId, quantity, size, price, name,img}}),
+    getToCart: () => requests.get('cart/user/'),
+    updateCartByUser: (productId, type, size) => requests.put('cart/user/' + productId, {type, size})
 }
 export default {
     Auth,
     Product,
     Category,
-    setToken: (_token) => {
-        token = _token;
-      },
+    Cart
 };

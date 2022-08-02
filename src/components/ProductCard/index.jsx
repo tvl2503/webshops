@@ -14,7 +14,6 @@ const ProductCard = ({product}) => {
  
     dispatch(addProductModal(product))
 
-
   }
   return (
     <div className='product--card'>
@@ -33,14 +32,27 @@ const ProductCard = ({product}) => {
                 {product.name}
               </Link>
           </p>
-          <p className="product--card__text__price">
-            {numberWithVND(product.price)}
-          </p>
+          <div className="product--card__text__price">
+          <p>{numberWithVND(product.price*(100-product.percentReduce)/100)}</p>
+            {product.percentReduce > 0 &&
+              <div className="price__old">
+                {numberWithVND(product.price)}
+              </div>
+            }
+          </div>
         </div>
+        {
+          product.percentReduce > 0 &&
+          <div className="percent">
+            -{product.percentReduce}%
+          </div>
+        }
     </div>
   )
 }
 
-ProductCard.propTypes = {}
+ProductCard.propTypes = {
+  product: PropTypes.object.isRequired
+}
 
 export default ProductCard

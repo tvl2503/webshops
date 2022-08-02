@@ -8,42 +8,50 @@ import ProductContent from './ProductContent';
 import "./ProductDetail.scss"
 import ProductSlider from './ProductSlider';
 import NotFound from '../NotFound';
-const crumbs = [
-  {
-      title: "Giày nike",
-      href: "nike"
-  },
-  {
-      title: "Giày Nike Air Force 1 Shadow SE Women’s “Solar Red” DB3902-100",
-      href: "nike"
-  }
-]
-
+import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../../components/Loading';
 const ProductDetail = () => {
+  
   const {id} = useParams();
   const [product, setProduct] = useState(null);
+  const [isLoading, setIsLoading] = useState(false)
+  const crumbs = [
+    {
+        title: "Giày nike",
+        href: "nike"
+    },
+    {
+        title: product ? product.name : "Chi tiết sản phẩm",
+        href: "nike"
+    }
+  ]
   const [error, setError] = useState(false)
   const getProduct = useCallback(async () => {
+    setIsLoading(true)
     try{
 
       const pr = await agent.Product.getProductByID(id)
       setProduct(pr)
+      setIsLoading(false)
+      setError(false)
     
     }catch(error){
+      setIsLoading(false)
       setError(true)
-      console.log(error);
+    
     }
-  }, [])
+  }, [id])
   useEffect(() => {
       getProduct()
     }, [getProduct])
   return (
-      <Helmet title = {"Giày Nike Air Force 1 Shadow SE Women’s “Solar Red” DB3902-100"} >
+      <Helmet title = {product ? product.name : "Chi tiết sản phẩm"} >
             <Breadcrumb crumbs = {crumbs} />
           {product && <div className="container product--detail">
             <ProductSlider product = {product} />
-            <ProductContent product = {product} />
+            <ProductContent product = {product}/>
           </div>}
+          {isLoading && <Loading />}
           {error && <NotFound />}
       </Helmet>
     

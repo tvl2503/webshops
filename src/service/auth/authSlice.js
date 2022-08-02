@@ -48,7 +48,7 @@ const initialState = {
 
 }
 function successReducer(state, action) {
-    
+    localStorage.setItem("token", action.payload.token)
     state.status = Status.SUCCESS;
     state.token = action.payload.token;
     state.user = action.payload.user;
@@ -60,7 +60,10 @@ const authSlice = createSlice(
         name: 'auth',
         initialState,
         reducers: {
-            logout: () => initialState,
+            logout: () => {
+                localStorage.removeItem('token')
+                return initialState
+            },
             setToken(state, action){
                 state.token = action.payload;
             }

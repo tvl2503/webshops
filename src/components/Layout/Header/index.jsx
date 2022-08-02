@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react'
+
 import "./Header.scss"
 import HeaderBottom from './HeaderBottom';
 import HeaderTop from './HeaderTop';
 
 const Header = () => {
   const headerRef = useRef(null)
-  useEffect(() => {
+   useEffect(() => {
     window.addEventListener("scroll", ()=> {
   
       if(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100 ){

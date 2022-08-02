@@ -3,9 +3,9 @@ import Grid from '../../Grid'
 import { Link } from 'react-router-dom'
 import "./Footer.scss"
 import { imgVis } from '../../../assets/data/imgVis'
-const companyInfo = ["Hà Thành Plaza số 102, Thái Thịnh, Đống Đa, Hà Nội",
-  "1900.2812",
-  "contact@nhanh.vn"
+const companyInfo = ["45/68, Triều Khúc, Thanh Trì, Hà Nội",
+  "0392280138",
+  "contact@gmail.com"
 ]
 const logo  = "http://t0320.store.nhanh.vn/img/nhanh.png";
 

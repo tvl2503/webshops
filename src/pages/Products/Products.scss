@@ -7,4 +7,12 @@
     @include mobile{
         display: block;
     }
+    &--list--product{
+        text-align: center;
+        .pagination{
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+    }
 }
