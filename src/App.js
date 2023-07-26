@@ -1,7 +1,7 @@
 import Layout from "./components/Layout";
 import GlobalStyles from "./components/GlobalStyles";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useCallback, useEffect, useState } from "react";
 import agent from "./service/agent";
 function App() {
@@ -41,24 +41,23 @@ function App() {
   // }
   const [category, setCategory] = useState({});
   const getCate = useCallback(async () => {
-    try{
+    try {
       const cate = await agent.Category.getAllCategory();
-      setCategory(cate)
+      setCategory(cate);
+    } catch (err) {
+      setCategory({});
     }
-    catch(err){
-      setCategory({})
-    }
-  }, [])
+  }, []);
   useEffect(() => {
-    getCate()
-  }, [getCate])
+    getCate();
+  }, [getCate]);
   return (
-    
     <GlobalStyles>
-        <ToastContainer autoClose={2000} />
-        {category.length > 0 && <Layout category = {category} />}
-        
-      </GlobalStyles>
+      <ToastContainer autoClose={2000} />
+      {category.length > 0 && <Layout category={category} />}
+      <div>c</div>
+      <div>test</div>
+    </GlobalStyles>
   );
 }
 
